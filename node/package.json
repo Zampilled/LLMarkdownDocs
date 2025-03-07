@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "@rescui/use-glow-hover": "^0.7.1",
+    "react": "^19.0.0"
+  },
+  "type": "module",
+  "main": "get_exports.js",
+  "scripts": {
+    "test": "node get_exports.js"
+  }
+}
