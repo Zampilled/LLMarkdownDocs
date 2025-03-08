@@ -26,7 +26,7 @@ class NPMExport(BaseModel):
     test_cases: List[TestCase]
 
 
-ollama_model: str = "tinyllama"
+ollama_model: str = "llama3.1:8b"
 
 my_prompt: str = """
 You are an expert NodeJS export documentation writer. 
