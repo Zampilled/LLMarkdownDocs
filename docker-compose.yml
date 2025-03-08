@@ -1,0 +1,4 @@
+services:
+  ollama:
+    image: "ollama/ollama:latest"
+
