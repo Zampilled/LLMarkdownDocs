@@ -1,9 +1,14 @@
 import os
 
 
-def getFiles(node_package: str):
+def get_files(node_package: str):
+    """
+    Retrieves codebase of given node package to be fed into LLM
+    :param node_package: name of installed node package
+    :return: codebase as string
+    """
     my_code = ""
-    root = 'node/node_modules/' + node_package
+    root = 'node_modules/' + node_package
     search = []
 
     for path, _, files in os.walk(root):
@@ -14,7 +19,7 @@ def getFiles(node_package: str):
         f = open(file, 'r')
         my_code += "\n" + file + "\n"
         my_code += f.read()
-        my_code += "ENDFILE \n"
+        my_code += "\n ENDFILE \n"
         f.close()
 
     return my_code

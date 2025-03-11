@@ -3,37 +3,54 @@ import re
 from mdutils import MdUtils
 
 
-def writeDocs(mdFile, level: int, response):
-    # prevents recursion issues
-    if level > 6:
-        level = 6
-    myLevel = level
+def write_docs(mdFile, level: int, response):
+    """
+    Recursively writes markdown documentation using the provided array of responses
+    :param mdFile: the markdown object to write
+    :param level: the level of heading of this array
+    :param response: the array of responses to doccument
+    :return: void
+    """
+    # prevents recursion issues as max level is 6 for headings
+    if level > 4:
+        level = 4
     first = True
     for value in response:
         if first:
             first = False
         else:
+            # line break between items in lists so its obvious they're separate items
             mdFile.write("\n\n --- \n")
         my_keys = value.keys()
         for key in my_keys:
-            headingKey = re.sub(r"(\w)([A-Z])", r"\1 \2", key)
+            # making names have space eg. TestCase -> Test Case
+            heading_key = re.sub(r"(\w)([A-Z])", r"\1 \2", key)
             if key != "Name":
-                mdFile.new_header(level=myLevel + 1, title=headingKey, add_table_of_contents="n")
+                mdFile.new_header(level=level+1, title=heading_key, add_table_of_contents="n")
             if isinstance(value[key], list):
-                writeDocs(mdFile=mdFile, level=myLevel + 2, response=value[key])
+                write_docs(mdFile=mdFile, level=level + 2, response=value[key])
             elif isinstance(value[key], dict):
-                writeDocs(mdFile=mdFile, level=myLevel + 2, response=[value[key]])
+                write_docs(mdFile=mdFile, level=level + 2, response=[value[key]])
             else:
+                # Keyword for creating a codeblock
                 if key == "Code" or key == "ExampleUse":
                     mdFile.write("```js \n" + value[key] + "\n```")
+                #Every dictionary has a name and looks better when heading is the name itself and not "Name"
                 elif key == "Name":
-                    mdFile.new_header(level=myLevel, title=value[key], add_table_of_contents="n")
+                    mdFile.new_header(level=level, title=value[key], add_table_of_contents="n")
                 else:
                     mdFile.new_paragraph(value[key])
 
 
-def createMarkdown(package, responses, outputdir):
+def create_markdown(package, responses, outputdir):
+    """
+    creates the markdown file with structed llm responses
+    :param package: package name for title
+    :param responses: structured llm responses as list
+    :param outputdir: output directory of markdown docs
+    :return:
+    """
     mdFile = MdUtils(file_name=outputdir, title=package + " Documentation")
     level = 2
-    writeDocs(mdFile, level, responses)
+    write_docs(mdFile, level, responses)
     mdFile.create_md_file()
