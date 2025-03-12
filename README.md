@@ -2,7 +2,25 @@
 
 This is a project to generate docs for the "@rescui/use-glow-hover" npm package.
 
+## Prerequisites 
+
+Nodejs  
+Ollama  
+Python3 
+
 ## Install
+
+### Automatic Run
+```bash
+pip install -r code/requirements.txt
+```
+
+```bash
+chmod +x ./start.sh
+./start.sh
+```
+### Manual Run
+
 
 ## How It Works
 
