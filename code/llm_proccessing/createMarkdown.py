@@ -3,15 +3,22 @@ import re
 from mdutils import MdUtils
 
 
-def write_docs(mdFile, level: int, response):
+def write_docs(mdFile, level: int, response:str, typescript:bool):
     """
     Recursively writes markdown documentation using the provided array of responses
     :param mdFile: the markdown object to write
     :param level: the level of heading of this array
     :param response: the array of responses to doccument
+    :param typescript: If true only typescript files will be imported if false only javascript ones will
     :return: void
     """
-    # prevents recursion issues as max level is 6 for headings
+
+   # whether code should be wrapped in a typescript of javascript block.
+    if typescript:
+        ending = "ts"
+    else:
+        ending = "js"
+    # prevents recursion issues as max level is 6 for headings.
     if level > 4:
         level = 4
     first = True
@@ -34,7 +41,7 @@ def write_docs(mdFile, level: int, response):
             else:
                 # Keyword for creating a codeblock
                 if key == "Code" or key == "ExampleUse":
-                    mdFile.write("```js \n" + value[key] + "\n```")
+                    mdFile.write("```"+ending+" \n" + value[key] + "\n```")
                 #Every dictionary has a name and looks better when heading is the name itself and not "Name"
                 elif key == "Name":
                     mdFile.new_header(level=level, title=value[key], add_table_of_contents="n")
