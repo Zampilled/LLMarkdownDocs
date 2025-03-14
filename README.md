@@ -4,7 +4,8 @@ This is a project to generate docs for the "@rescui/use-glow-hover" npm package.
 
 ## TLDR
 
-If you're just looking for the best docs I was able to make look under examples/deepseek-r1.md
+**If you're just looking for the best docs I was able to make look under examples/deepseek-r1:7b.md .**   
+Despite not being the biggest model I used it had the best output
 
 It can also technically be adapted for any npm package though I haven't tried that feel free to!   
 Also, custom doc structures and any ollama model can be used with it!
@@ -117,3 +118,12 @@ This can be done recursively where each key in an object gets a heading of lower
 This means that this class structure can be changed to whatever type of doccumentation is best suited for a package and 
 the markdown processing code doesn't need to change.  
 This code can be found under code/llm_processing/createMarkdown.py
+
+## Examples and Thoughts
+Under the examples directory you'll see the various models I've run through with typescript set to true as the typescript files
+of the package had more to infer as they had an options class.  All the examples are raw outputs from the script apart from deepseek-r1:32b.md, 
+which I made a small change as one of the code blocks didn't format right.  
+The different models output wildly different things like in llama3.1:8b.md where in a description it links to a header that it
+doesn't know exists and somehow that link works (line 22)!
+
+The best I was able to create was deepseek-r1:7b.md it's quite extensive and you can consider it my submission.
