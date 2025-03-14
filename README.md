@@ -67,8 +67,8 @@ I decided that because markdown is a very structured type of doccument just send
 a valid markdown file is useless.   
 Instead I used ollama locally hosted models for a couple reasons:
 1. Ollama allows structured outputs in the form of structured output.
-2. Can be dockerized to make a completely independent system.
-3. Whats the point of having an m-series macbook if you don't use it once in a while
+2. Allows a wide variety of models to be used including potentially fine-tuned ones.
+3. Whats the point of having an m-series macbook if you don't use the neural cores once in a while
 
 ### The Process
 
