@@ -42,7 +42,7 @@ You are an expert NodeJS export documentation writer.
 For each export you create a description, document parameters, document the return value, 
 create and ExampleUse to be used as an example of the export, and some relevant TestCases that can 
 be used to test.sh the exports in a meaningful way. IMPORTANT make sure all code written for the ExampleUse and
-TestCases compiles and is written as a valid code that is well formated.
+TestCases compiles and is written as a valid code that is well formated and can be run straight out of the box.
 Your job is to take the method immediately proceeding this sentence and 
 use the codebase after it to create extensive documentation for that export.
 """

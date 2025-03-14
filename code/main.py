@@ -26,7 +26,7 @@ def main(package,exports, outputdir, model, typescript):
         response_dict = {"Name": method}
         response_dict.update(literal_eval(response))
         data.append(response_dict)
-    create_markdown(package, data, outputdir)
+    create_markdown(package, data, outputdir, typescript)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

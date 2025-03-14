@@ -5,7 +5,7 @@
 
 PACKAGE_NAME="@rescui/use-glow-hover"
 PACKAGE_EXPORTS="useGlowHover GlowHoverHookOptions glowHoverEffect GlowHoverOptions"
-MODEL_NAME="tinyllama"
+MODEL_NAME="deepseek-r1:70b"
 TYPESCRIPT=true
 
 ########################

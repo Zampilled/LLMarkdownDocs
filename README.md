@@ -1,25 +1,62 @@
 # LLMarkdownDocs
 
-This is a project to generate docs for the "@rescui/use-glow-hover" npm package.
+This is a project to generate docs for the "@rescui/use-glow-hover" npm package.  
+
+## TLDR
+
+If you're just looking for the best docs I was able to make look under examples/deepseek-r1.md
+
+It can also technically be adapted for any npm package though I haven't tried that feel free to!   
+Also, custom doc structures and any ollama model can be used with it!
+
+If you have any install problems or questions feel free to email me at: azamolot@tcd.ie 
 
 ## Prerequisites 
 
-Nodejs  
-Ollama  
-Python3 
+[NodeJs v23.7.0](https://nodejs.org/en)  
+[Ollama](https://ollama.com)  
+[Python v3.11.9](https://www.python.org/downloads/release/python-3119/)  
+[NPM v10.9.2](https://www.npmjs.com)
 
 ## Install
 
 ### Automatic Run
+
+First install all python requirements
 ```bash
 pip install -r code/requirements.txt
 ```
-
+Next run the start script to install node packages 
 ```bash
 chmod +x ./start.sh
 ./start.sh
 ```
 ### Manual Run
+
+If you want to manually run this first install python requirements.
+
+```bash
+pip install -r code/requirements.txt
+```
+
+Then access the  code dirctory 
+```bash
+cd code
+```
+Pull the ollama model you want to use (make sure ollama is running)
+```bash
+ollama pull <model_to_use>
+```
+Install the node package
+```bash
+npm i <npm_package_to_install>
+```
+Run with parameters use "python3 main.py -h" if unsure
+```bash
+python3 main.py -p <npm_package_to_install> -e <space_seperated_exports> -m <model_to_use> -o <export_dir> -t <typescript_or_javascript>
+```
+
+This is whats done in the the start.sh script so feel free to look at that if you have any questions.
 
 
 ## How It Works
@@ -80,5 +117,3 @@ This can be done recursively where each key in an object gets a heading of lower
 This means that this class structure can be changed to whatever type of doccumentation is best suited for a package and 
 the markdown processing code doesn't need to change.  
 This code can be found under code/llm_processing/createMarkdown.py
-
-## Issues

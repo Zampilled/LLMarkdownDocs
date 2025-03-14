@@ -3,7 +3,7 @@ import re
 from mdutils import MdUtils
 
 
-def write_docs(mdFile, level: int, response:str, typescript:bool):
+def write_docs(mdFile, level: int, response, typescript:bool):
     """
     Recursively writes markdown documentation using the provided array of responses
     :param mdFile: the markdown object to write
@@ -35,9 +35,9 @@ def write_docs(mdFile, level: int, response:str, typescript:bool):
             if key != "Name":
                 mdFile.new_header(level=level+1, title=heading_key, add_table_of_contents="n")
             if isinstance(value[key], list):
-                write_docs(mdFile=mdFile, level=level + 2, response=value[key])
+                write_docs(mdFile=mdFile, level=level + 2, response=value[key], typescript=typescript)
             elif isinstance(value[key], dict):
-                write_docs(mdFile=mdFile, level=level + 2, response=[value[key]])
+                write_docs(mdFile=mdFile, level=level + 2, response=[value[key]], typescript=typescript)
             else:
                 # Keyword for creating a codeblock
                 if key == "Code" or key == "ExampleUse":
@@ -49,15 +49,16 @@ def write_docs(mdFile, level: int, response:str, typescript:bool):
                     mdFile.new_paragraph(value[key])
 
 
-def create_markdown(package, responses, outputdir):
+def create_markdown(package, responses, outputdir, typescript):
     """
     creates the markdown file with structed llm responses
     :param package: package name for title
     :param responses: structured llm responses as list
     :param outputdir: output directory of markdown docs
+    :param typescript: If true only typescript files will be imported if false only javascript ones will
     :return:
     """
     mdFile = MdUtils(file_name=outputdir, title=package + " Documentation")
     level = 2
-    write_docs(mdFile, level, responses)
+    write_docs(mdFile, level, responses, typescript)
     mdFile.create_md_file()
